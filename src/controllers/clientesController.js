@@ -1,6 +1,14 @@
 import Clientes from "../models/Clientes.js";
 
 const nuevoCliente = async (req, res) => {
+    const { email } = req.body
+
+    const cliente = await Clientes.findOne({ email })
+    if (cliente) {
+        const error = new Error("El correo ya esta en uso")
+        return res.status(400).json({ msg: error.message })
+    }
+
     try {
         const cliente = new Clientes(req.body)
         await cliente.save()

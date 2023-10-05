@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { nuevoCliente, mostrarClientes, mostrarCliente, actualizarCliente, eliminarCliente } from "../controllers/clientesController.js";
-import { nuevoProducto, subirArchivo, mostrarProductos, mostrarProducto, actualizarProducto, eliminarProducto } from "../controllers/productosController.js";
+import { nuevoProducto, subirArchivo, mostrarProductos, mostrarProducto, actualizarProducto, eliminarProducto, buscarProducto } from "../controllers/productosController.js";
+import { nuevoPedido, mostrarPedidos, mostrarPedido, actualizarPedido, eliminarPedido } from "../controllers/pedidosController.js";
 
 const router = Router()
 
@@ -16,5 +17,12 @@ router.get("/productos", mostrarProductos)
 router.get("/productos/:productoId", mostrarProducto)
 router.put("/productos/:productoId", subirArchivo, actualizarProducto)
 router.delete("/productos/:productoId", eliminarProducto)
+router.post("/productos/busqueda/:query", buscarProducto)
+//pedidos
+router.post("/pedidos", nuevoPedido)
+router.get("/pedidos", mostrarPedidos)
+router.get("/pedidos/:pedidoID", mostrarPedido)
+router.put("/pedidos/:pedidoID", actualizarPedido)
+router.delete("/pedidos/:pedidoID", eliminarPedido)
 
 export default router

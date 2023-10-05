@@ -21,7 +21,7 @@ const fileStorage = multer.diskStorage({
 const configuracionMulter = {
     storage: fileStorage,
     fileFilter(req, file, cb) {
-        if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+        if (file.mimetype === "image/jpeg" || file.mimetype === "image/png" || file.mimetype === "image/webp") {
             cb(null, true)
         } else {
             cb(new Error("Formato no válido"))
@@ -101,7 +101,17 @@ const eliminarProducto = async (req, res) => {
         await Productos.findOneAndDelete({ _id: productoId })
         res.json({ msg: "Producto Eliminado correctamente" })
     } catch (error) {
+        console.log(error);
+    }
+}
 
+const buscarProducto = async (req, res) => {
+    try {
+        const { query } = req.params
+        const producto = await Productos.find({ nombre: new RegExp(query, "i") })
+        res.json(producto)
+    } catch (error) {
+        console.log(error);
     }
 }
 
@@ -111,5 +121,6 @@ export {
     mostrarProductos,
     mostrarProducto,
     actualizarProducto,
-    eliminarProducto
+    eliminarProducto,
+    buscarProducto
 }
