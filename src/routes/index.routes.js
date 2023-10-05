@@ -19,7 +19,7 @@ router.put("/productos/:productoId", subirArchivo, actualizarProducto)
 router.delete("/productos/:productoId", eliminarProducto)
 router.post("/productos/busqueda/:query", buscarProducto)
 //pedidos
-router.post("/pedidos", nuevoPedido)
+router.post("/pedidos/nuevo/:idUsuario", nuevoPedido)
 router.get("/pedidos", mostrarPedidos)
 router.get("/pedidos/:pedidoID", mostrarPedido)
 router.put("/pedidos/:pedidoID", actualizarPedido)
